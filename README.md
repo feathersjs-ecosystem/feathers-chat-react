@@ -1,5 +1,7 @@
 # Feathers React Chat
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/feathersjs/feathers-chat-react.svg)](https://greenkeeper.io/)
+
 A frontend for the [feathers-chat API](https://github.com/feathersjs/feathers-chat) using React.
 
 
