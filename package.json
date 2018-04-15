@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@feathersjs/authentication-client": "^1.0.2",
-    "@feathersjs/feathers": "^3.0.5",
-    "@feathersjs/socketio-client": "^1.0.2",
+    "@feathersjs/client": "^3.4.4",
     "moment": "^2.17.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
