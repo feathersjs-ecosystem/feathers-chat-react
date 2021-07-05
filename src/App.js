@@ -3,7 +3,6 @@ import Login from './login';
 import Chat from './chat';
 import client from './feathers';
 
-
 const messagesService = client.service('messages');
 const usersService = client.service('users');
 
@@ -12,12 +11,11 @@ const Application = () => {
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
 
-
   useEffect(() => {
-      // Try to authenticate with the JWT stored in localStorage
-      client.authenticate().catch(() => {
-        setLogin(null);
-      });
+    // Try to authenticate with the JWT stored in localStorage
+    client.authenticate().catch(() => {
+      setLogin(null);
+    });
 
     // On successfull login
     client.on('authenticated', loginResult => {
@@ -26,11 +24,11 @@ const Application = () => {
         messagesService.find({
           query: {
             $sort: { createdAt: -1 },
-            $limit: 25
-          }
+            $limit: 25,
+          },
         }),
-        usersService.find()
-      ]).then( ([ messagePage, userPage ]) => {
+        usersService.find(),
+      ]).then(([messagePage, userPage]) => {
         // We want the latest messages but in the reversed order
         const messagesResult = messagePage.data.reverse();
         const usersResult = userPage.data;
@@ -41,31 +39,38 @@ const Application = () => {
         setUsers(usersResult);
       });
     });
- 
+
     // On logout reset all all local state (which will then show the login screen)
-    client.on('logout', () => this.setState({
-      login: null,
-      messages: null,
-      users: null
-    }));
+    client.on('logout', () =>
+      this.setState({
+        login: null,
+        messages: null,
+        users: null,
+      })
+    );
 
     // Add new messages to the message list
-    messagesService.on('created', message => setMessages(currentMessages => currentMessages.concat(message)));
+    messagesService.on('created', message =>
+      setMessages(currentMessages => currentMessages.concat(message))
+    );
 
     // Add new users to the user list
-    usersService.on('created', user => setUsers(currentUsers => currentUsers.concat(user)));
-  }, [])
+    usersService.on('created', user =>
+      setUsers(currentUsers => currentUsers.concat(user))
+    );
+  }, []);
 
-
-   if(login === undefined) {
-      return <main className="container text-center">
+  if (login === undefined) {
+    return (
+      <main className="container text-center">
         <h1>Loading...</h1>
-      </main>;
-    } else if(login) {
-      return <Chat messages={messages} users={users} />
-    }
+      </main>
+    );
+  } else if (login) {
+    return <Chat messages={messages} users={users} />;
+  }
 
-    return <Login />;
-}
+  return <Login />;
+};
 
 export default Application;
