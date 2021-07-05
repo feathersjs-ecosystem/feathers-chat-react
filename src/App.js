@@ -41,13 +41,11 @@ const Application = () => {
     });
 
     // On logout reset all all local state (which will then show the login screen)
-    client.on('logout', () =>
-      this.setState({
-        login: null,
-        messages: null,
-        users: null,
-      })
-    );
+    client.on('logout', () => {
+      setLogin(null);
+      setMessages([]);
+      setUsers([]);
+    });
 
     // Add new messages to the message list
     messagesService.on('created', message =>
