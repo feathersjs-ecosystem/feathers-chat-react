@@ -1,3 +1,6 @@
+> __Note:__ All chat examples have been moved to https://github.com/feathersjs/feathers-chat/
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
